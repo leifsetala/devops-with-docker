@@ -1,0 +1,4 @@
+docker build -t devops-with-docker-backend .
+docker build -t devops-with-docker-frontend .
+docker run -p 8080:8080 devops-with-docker-backend
+docker run -p 5000:5000 devops-with-docker-frontend

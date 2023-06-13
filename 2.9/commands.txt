@@ -1,0 +1,1 @@
+Had to change the urls in Dockerfiles (get rid of ports)

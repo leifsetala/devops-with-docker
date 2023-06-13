@@ -1,0 +1,4 @@
+Built a simple image which just extends the previously made image (in 1.15) and pushed to heroku registry.
+Then deployed the app to Heroku with Heroku CLI
+
+App can be found in https://devops-with-docker.herokuapp.com/

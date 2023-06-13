@@ -1,0 +1,1 @@
+FROM leqsetal/devops-with-docker

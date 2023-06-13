@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  redis:
+    image: redis
+    restart: unless-stopped
+  backend:
+    image: devops-with-docker-backend
+    links:
+      - redis
+      - postgres
+    environment:
+      - REQUEST_ORIGIN=http://localhost:80
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+  frontend:
+    image: devops-with-docker-frontend
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost/api
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - type: bind
+        source: ./database
+        target: /var/lib/postgresql/data
+  nginx:
+    image: nginx:latest
+    links:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf

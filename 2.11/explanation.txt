@@ -1,0 +1,2 @@
+Pretty much all of our development at work is done with docker containers. I've added an example compose file with some anonymization that I've used and built.
+It's used to develop a Ruby on Rails application with db and memcached containers.

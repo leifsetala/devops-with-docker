@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  redis:
+    image: redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+  backend:
+    image: devops-with-docker-backend
+    ports:
+      - 8080:8080
+    links:
+      - redis
+    environment:
+      - REQUEST_ORIGIN=http://localhost:5000
+      - REDIS_HOST=redis
+  frontend:
+    image: devops-with-docker-frontend
+    ports:
+      - 5000:5000
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+
