@@ -17,6 +17,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build and push
       uses: docker/build-push-action@v4
+      working-directory: ./3.1/express-app
       with:
         push: true
         tags: leqsetal/express-app:latest
