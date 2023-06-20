@@ -1,0 +1,16 @@
+FROM golang:1.16
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY . .
+
+RUN go build && useradd -m appuser && chown -R appuser:appuser /app
+
+ENV REQUEST_ORIGIN=http://localhost
+
+EXPOSE 8080
+
+USER appuser
+
+ENTRYPOINT ["./server"]

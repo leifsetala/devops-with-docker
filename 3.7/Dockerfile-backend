@@ -1,0 +1,16 @@
+FROM golang:1.16-alpine
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY . .
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup && go build && chown -R appuser:appgroup /app
+
+ENV REQUEST_ORIGIN=http://localhost
+
+EXPOSE 8080
+
+USER appuser
+
+ENTRYPOINT ["./server"]

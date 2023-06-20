@@ -1,0 +1,28 @@
+FROM ruby:3.2.2
+
+# Update system packages
+RUN apt-get update -y
+
+# Install build-essential
+RUN apt-get install -y build-essential
+
+# Install PostgreSQL
+RUN apt-get install -y postgresql
+
+# Install tzdata
+RUN apt-get install -y tzdata
+
+# Install nodejs
+RUN apt-get install -y nodejs
+
+WORKDIR /app
+
+COPY . .
+
+# Install gems
+COPY Gemfile* .
+RUN bundle install
+
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
